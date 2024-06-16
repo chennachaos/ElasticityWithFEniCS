@@ -23,5 +23,9 @@ Some of the example problems solved are shown below.
 #### Dilatation of a Cube
 <img src="./Growth/cube/cube-growth-10times-dispX.png" alt="Pressure" width="250"/>
 
+#### Deformation of rods
+<img src="./Growth/rod/rod3d-circle.png" alt="Pressure" width="250"/>
+<img src="./Growth/rod/rod3d-spiral.png" alt="Pressure" width="250"/>
+
 
 ## Magnetomechanics
