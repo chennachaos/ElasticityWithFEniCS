@@ -139,7 +139,7 @@ u_v = w.sub(0)
 u_v.rename("displacement","")
 
 p_v = w.sub(1)
-p_v.rename("p", "")
+p_v.rename("pressure", "")
 
 
 # function to write results to XDMF at time t
