@@ -20,4 +20,8 @@ Some of the example problems solved are shown below.
 
 ## Morphoelasticity - Growth-driven deformations
 
+#### Dilation of a Cube
+<img src="./Growth/cube/cube-growth-10times-dispX.png" alt="Pressure" width="250"/>
+
+
 ## Magnetomechanics
