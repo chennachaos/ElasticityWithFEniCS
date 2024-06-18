@@ -1,5 +1,7 @@
 This repository contains source files (Python scripts) for solving elasticity problems using FEniCS library.
 
+Scripts are based on the *legacy* FEniCS version. The input meshes are generated using **GMSH** and converted to **XML** format using `dolfin-convert` command.
+
 Some of the example problems solved are shown below.
 
 ## Linear and Hyperelasticity
