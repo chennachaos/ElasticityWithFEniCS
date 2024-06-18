@@ -75,6 +75,9 @@ w = Function(ME)
 w_old = Function(ME)
 (u_old, p_old) = split(w_old)
 
+# DOFs at previous previous load step
+w_old2 = Function(ME)
+(u_old2, p_old2) = split(w_old2)
 
 
 # Boundary conditions
@@ -132,7 +135,7 @@ prm['newton_solver']['maximum_iterations'] = 30
 prm['newton_solver']['convergence_criterion'] = 'incremental'
 
 
-num_steps = 100
+num_steps = 20
 dt = 1.0/num_steps
 # Time-stepping
 t = 0
@@ -167,12 +170,19 @@ for timeStep in range(num_steps):
 
     print("\n\n Load step = ", timeStep+1)
     print("     Time      = ", t)
+    
+    #u = 2*u_old - u_old2
+    # solution predictor. This will improve convergence.
+    w.vector()[:] = 2*w_old.vector() - w_old2.vector()
 
     # Solve the problem
     # Compute solution
     (iter, converged) = solver.solve()
 
     writeResults(t)
+    
+    w_old2.vector()[:] = w_old.vector()
+    w_old.vector()[:] = w.vector()
 
 
 

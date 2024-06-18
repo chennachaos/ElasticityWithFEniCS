@@ -20,8 +20,8 @@ import numpy as np
 # Form compiler options
 parameters["form_compiler"]["optimize"]     = True
 parameters["form_compiler"]["cpp_optimize"] = True
-parameters["form_compiler"]["cpp_optimize_flags"] = "-O3 -ffast-math -march=native"
-parameters["form_compiler"]["quadrature_degree"] = 4
+parameters["form_compiler"]["cpp_optimize_flags"] = "-O2 -ffast-math -march=native"
+parameters["form_compiler"]["quadrature_degree"] = 5
 
 
 #read mesh
@@ -74,6 +74,9 @@ w = Function(ME)
 w_old = Function(ME)
 (u_old, p_old) = split(w_old)
 
+# DOFs at previous previous load step
+w_old2 = Function(ME)
+(u_old2, p_old2) = split(w_old2)
 
 
 # Boundary conditions
@@ -98,8 +101,8 @@ t   = 0.0
 
 Fg = Expression( (("1.0",0.0,"0.4*t"),\
                   (0.0,"1.0",0.0),\
-                  (0.0,0.0,"1.0-2.0*3.1415*x[1]*t")),\
-                t=t, degree=4)
+                  (0.0,0.0,"1.0-2.0*3.1415*x[1]*0.5*(1.0-cos(pi*t))")),\
+                 t=t, degree=2)
 
 FgInv = inv(Fg)
 Jg = det(Fg)
@@ -133,14 +136,14 @@ prm['newton_solver']['maximum_iterations'] = 30
 prm['newton_solver']['convergence_criterion'] = 'incremental'
 
 
-num_steps = 10
+num_steps = 200
 dt = 1.0/num_steps
 # Time-stepping
 t = 0
 
 
 # Output file setup
-file_results = XDMFFile("rod-helical1.xdmf")
+file_results = XDMFFile("rod3d-helical1.xdmf")
 file_results.parameters["flush_output"] = True
 file_results.parameters["functions_share_mesh"] = True
 
@@ -169,11 +172,18 @@ for timeStep in range(num_steps):
     print("\n\n Load step = ", timeStep+1)
     print("     Time      = ", t)
 
+    # solution predictor. This will improve convergence.
+    w.vector()[:] = 2*w_old.vector() - w_old2.vector()
+
     # Solve the problem
     # Compute solution
     (iter, converged) = solver.solve()
 
     writeResults(t)
+    
+    w_old2.vector()[:] = w_old.vector()
+    w_old.vector()[:] = w.vector()
+
 
 
 
