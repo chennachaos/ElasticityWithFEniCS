@@ -21,11 +21,11 @@ Some of the example problems solved are shown below.
 ## Morphoelasticity - Growth-driven deformations
 
 #### Dilatation of a Cube
-<img src="./Growth/cube/cube-growth-10times-dispX.png" alt="Pressure" width="250"/>
+<img src="./Growth/cube/cube-growth-10times-dispX.png" alt="Growth Cube" width="250"/>
 
 #### Deformation of rods
-<img src="./Growth/rod/rod3d-circle.png" alt="Pressure" width="250"/>
-<img src="./Growth/rod/rod3d-spiral.png" alt="Pressure" width="250"/>
-
+<img src="./Growth/rod/rod3d-circle.png" alt="Rod - Circle shape" width="230"/>
+<img src="./Growth/rod/rod3d-spiral.png" alt="Rod - Spiral shape" width="230"/>
+<img src="./Growth/rod/rod3d-helical1.png" alt="Rod - Helical shape 1" width="230"/>
 
 ## Magnetomechanics
