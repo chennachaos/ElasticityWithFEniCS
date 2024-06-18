@@ -12,7 +12,6 @@ Created on Sun 16-Jun-2024
 
 
 from fenics import *
-from dolfinx import fem, io
 
 
 # Form compiler options
